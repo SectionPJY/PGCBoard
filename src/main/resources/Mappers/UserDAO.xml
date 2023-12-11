@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UserMapper">
+	<!-- User List -->
+	<select id="userList" resultType="UserDTO">
+		SELECT u_id, u_uid, u_pw, u_name, u_age, u_phone, u_mode, u_reg
+		FROM b_user
+		WHERE u_reg = 1 AND u_mode = 0;
+	</select>
+
+	<!-- Unregistered User List -->
+	<select id="unregUserList" resultType="UserDTO">
+		SELECT u_id, u_uid, u_pw, u_name, u_age, u_phone, u_mode, u_reg
+		FROM b_user
+		WHERE u_reg = 0;
+	</select>
+	
+	<!-- Rejection User List -->
+	<select id="rejUserList" resultType="UserDTO">
+		SELECT u_id, u_uid, u_pw, u_name, u_age, u_phone, u_mode, u_reg
+		FROM b_user
+		WHERE u_reg = 2;
+	</select>
+
+	<!-- User Sign In -->
+	<select id="userLogin" resultType="int">
+		SELECT COUNT(*)
+		FROM b_user
+		WHERE u_uid = #{u_uid} AND u_pw = #{u_pw};
+	</select>
+	
+	<!-- Sign In Info -->
+	<select id="signInInfo" resultType="UserDTO">
+		SELECT u_id, u_uid, u_pw, u_name, u_age, u_phone, u_mode, u_reg
+		FROM b_user
+		WHERE u_uid = #{u_uid};
+	</select>
+	
+	<!-- User Registration Check -->
+	<select id="userRegCheck" resultType="int">
+		SELECT u_reg
+		FROM b_user
+		WHERE u_uid = #{u_uid};
+	</select>
+
+	<!-- ID Duplicate Check -->
+	<select id="idDupCheck" resultType="int">
+		SELECT COUNT(*)
+		FROM b_user
+		WHERE u_uid = #{u_uid};
+	</select>
+	
+	<!-- Sign Up -->
+	<insert id="signUp">
+		INSERT INTO b_user(u_uid, u_pw, u_name, u_age, u_phone)
+		VALUES(#{u_id}, #{u_pw}, #{u_name}, #{u_age}, #{u_phone});
+	</insert>
+	
+	<!-- Update Registration -->
+	<update id="userApp">
+		UPDATE b_user
+		SET u_reg = 1
+		WHERE u_uid = #{u_id};
+	</update>
+	
+	<!-- User Rejection -->
+	<update id="userBan">
+		UPDATE b_user
+		SET u_reg = 2
+		WHERE u_uid = #{u_id};
+	</update>
+	
+	<!-- User Information -->
+	<select id="userInfo" resultType="UserDTO">
+		SELECT u_id, u_uid, u_pw, u_name, u_age, u_phone, u_mode, u_reg
+		FROM b_user
+		WHERE u_id = #{u_id};
+	</select>
+	
+	<!-- Update User -->
+	<update id="userUpdate">
+		UPDATE b_user
+		SET u_pw = #{u_pw}, u_name = #{u_name}, u_age = #{u_age}, u_phone = #{u_phone}
+		WHERE u_uid = #{u_uid};
+	</update>
+	
+	<!-- User Count -->
+	<select id="userCnt" resultType="int">
+		SELECT COUNT(u_id)
+		FROM b_user
+		WHERE u_reg = 1 AND u_mode = 0
+		LIMIT 10;
+	</select>
+	
+	<!-- Rejection User Count -->
+	<select id="userCntRej" resultType="int">
+		SELECT COUNT(u_id)
+		FROM b_user
+		WHERE u_reg = 2 AND u_mode = 0
+		LIMIT 10;
+	</select>
+	
+	<!-- Unregister User Count -->
+	<select id="userCntUn" resultType="int">
+		SELECT COUNT(u_id)
+		FROM b_user
+		WHERE u_reg = 0 AND u_mode = 0
+		LIMIT 10;
+	</select>
+</mapper>

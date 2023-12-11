@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ReviewMapper">
+	<!-- Insert Review -->
+	<insert id="insertReview">
+		INSERT INTO b_review(r_uid, r_gid, r_content)
+		VALUES(#{r_uid}, #{r_gid}, #{r_content});
+	</insert>
+	
+	<!-- Select Review List -->
+	<select id="selectReview" resultType="ReviewDTO">
+		SELECT r.r_id, r.r_uid, r.r_gid, r.r_date, r.r_content, u.u_name
+		FROM b_review r, b_user u
+		WHERE r.r_uid = u.u_id AND r_gid = #{g_id}
+		ORDER BY r_id DESC;
+	</select>
+	
+	<!-- Review List -->
+	<select id="reviewList" resultType="ReviewDTO">
+		SELECT r_id, r_uid, r_gid, r_date, r_content, u_name
+		FROM b_review, b_user
+		WHERE b_review.r_uid = b_user.u_id AND r_id &gt;= #{startNum}
+		ORDER BY r_id
+		LIMIT 10;
+	</select>
+
+	<!-- Review Total Count -->
+	<select id="reviewTotalCnt" resultType="int">
+		SELECT COUNT(r_id)
+		FROM b_review;
+	</select>
+	
+	<!-- Review Select Count -->
+	<select id="reviewSelectCnt" resultType="int">
+		SELECT COUNT(r_id)
+		FROM b_review
+		WHERE r_gid = #{r_gid};
+	</select>
+	
+	<!-- Review Delete -->
+	<delete id="reviewDelete">
+		DELETE
+		FROM b_review
+		WHERE r_id = #{r_id};
+		
+		SET @count = 0;
+		UPDATE b_review SET r_id = @count:= @count + 1;
+	</delete>
+</mapper>

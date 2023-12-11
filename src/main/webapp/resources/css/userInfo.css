@@ -1,0 +1,205 @@
+@charset "UTF-8";
+
+.nav-wrapper{
+  display:inline-block;
+  width:100%;
+  height:80px;
+   background: #0c2340;
+  background: linear-gradient(to left,#0c2340 27%,#1c3e69 70%);
+  background: -moz-linear-gradient(right,#0c2340 27%,#1c3e69 70%);
+  background: -webkit-linear-gradient(right,#0c2340 27%,#1c3e69 70%);
+  background: -o-linear-gradient(right,#0c2340 27%,#1c3e69 70%);
+  background: -ms-linear-gradient(right,#0c2340 27%,#1c3e69 70%);
+  -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0c2340', endColorstr='#1c3e69', gradientType='1');
+  h1 {
+    color:#fff;  font-family:tahoma,verdana,arial,sans-serif;
+    padding:0;
+    margin:5px 0 0 10px;
+  }
+  
+}
+
+.list{
+  text-decoration:none;
+  list-style:none;
+  display:inline-block;
+  width:100%;
+  margin:5px 0 0 0;
+  padding: 0 0 0 20px;
+}
+.list-item{
+  display: inline-block;
+  padding:0 10px 7px 10px;
+  position:relative;
+  font-family:tahoma,verdana,arial,sans-serif;
+    font-size:90%;
+  color:#fff;
+}
+.list-item:hover{
+  background:#e65900;
+}
+.list-item:hover > .drop-ul{
+  display:block;
+}
+.drop-ul{
+  position:absolute;
+   text-decoration:none;
+  list-style:none;
+  padding: 0;
+ width:100%;
+  padding-left:10px;
+  background:#e65900;
+  display:none;
+  top:24px;
+  left:0;
+  box-sizing: border-box;
+  z-index: 30;
+}
+.list-drop{
+  display:block;
+  padding:5px 0 5px 0;
+  
+}
+.nav-text-wrap{
+  float:left;
+  display:inline-block;
+  width:70%
+}
+.nav-image-wrapper{
+  float:right;
+  width:11%;
+  display:inline-block;
+  margin-top:3px;
+  margin-right:20px;
+  min-width:157px;
+  img{
+    width:38.5%
+  }
+}
+.nav-tabs {
+    border-bottom: 1px solid #ddd;
+    margin-left: 5px;
+}
+.radio-align{
+          margin-left: 28% !important;
+}
+
+.bread-crumbs { 
+	list-style: none; 
+	overflow: hidden; 
+	font: 11px Helvetica, Arial, Sans-Serif;
+  margin:2% 0 0 2%;
+}
+.bread-crumbs li { 
+	float: left; 
+}
+.bread-crumbs li a {
+	color: white;
+	text-decoration: none; 
+	padding: 10px 0 10px 65px;
+	background: brown;                   /* fallback color */
+	background: hsla(34,85%,35%,1); 
+	position: relative; 
+	display: block;
+	float: left;
+}
+.bread-crumbs li a:after { 
+	content: " "; 
+	display: block; 
+	width: 0; 
+	height: 0;
+	border-top: 50px solid transparent;           /* Go big on the size, and let overflow hide */
+	border-bottom: 50px solid transparent;
+	border-left: 30px solid hsla(34,85%,35%,1);
+	position: absolute;
+	top: 50%;
+	margin-top: -50px; 
+	left: 100%;
+	z-index: 2; 
+}
+.bread-crumbs li a:before { 
+	content: " "; 
+	display: block; 
+	width: 0; 
+	height: 0;
+	border-top: 50px solid transparent;       
+	border-bottom: 50px solid transparent;
+	border-left: 30px solid white;
+	position: absolute;
+	top: 50%;
+	margin-top: -50px; 
+	margin-left: 1px;
+	left: 100%;
+	z-index: 1; 
+}
+.bread-crumbs li:first-child a {
+	padding-left: 10px;
+}
+.bread-crumbs li:nth-child(2) a       { background:        hsla(34,85%,45%,1); }
+.bread-crumbs li:nth-child(2) a:after { border-left-color: hsla(34,85%,45%,1); }
+.bread-crumbs li:nth-child(3) a       { background:        hsla(34,85%,55%,1); }
+.bread-crumbs li:nth-child(3) a:after { border-left-color: hsla(34,85%,55%,1); }
+.bread-crumbs li:nth-child(4) a       { background:        hsla(34,85%,65%,1); }
+.bread-crumbs li:nth-child(4) a:after { border-left-color: hsla(34,85%,65%,1); }
+.bread-crumbs li:nth-child(5) a       { background:        hsla(34,85%,75%,1); }
+.bread-crumbs li:nth-child(5) a:after { border-left-color: hsla(34,85%,75%,1); }
+.bread-crumbs li:last-child a {
+	color: black;
+	pointer-events: none;
+	cursor: default;
+}
+.bread-crumbs li a:hover { background: hsla(34,85%,25%,1); }
+.bread-crumbs li a:hover:after { border-left-color: hsla(34,85%,25%,1) !important; }
+
+
+.user-profile-wrapper{
+ display: flex;
+ width: 100%;
+}
+.profile-picture{
+      width: 30%;
+}
+.user-image{
+  width:150px;
+  height:150px;
+  margin:10%;
+}
+
+.name-tags{
+  display: inline-block;
+}
+
+.container {
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 15px;
+}
+.user-full-name{
+  display:inline-block;
+  margin:2% 0 0 0 ;
+  width:100%;
+  
+}
+.form-align {
+      width:40% !important;
+    margin-top: 3% !important;
+    margin-left: 3% !important;
+}
+.name-and-tags {
+    width: 80%;
+}
+textarea.form-control {
+    height: auto;
+    width: 70%;
+    margin-left: 20%;
+}
+@media (min-width: 768px){
+.col-sm-10 {
+    width: 70.333333%;
+  }
+  .col-sm-2 {
+    width: 25.666667%;
+}
+}

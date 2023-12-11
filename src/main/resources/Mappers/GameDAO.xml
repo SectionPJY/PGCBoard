@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GameMapper">
+	<!-- Game List -->
+	<select id="gameList" resultType="GameDTO">
+		SELECT g_id, g_name, g_content, g_rent
+		FROM b_game;
+	</select>
+	
+	<!-- Select Game -->
+	<select id="selectGame" resultType="GameDTO">
+		SELECT g_id, g_name, g_content, g_rent
+		FROM b_game
+		WHERE g_id = #{g_id};
+	</select>
+	
+	<!-- Update Game -->
+	<update id="updateGame">
+		UPDATE b_game
+		SET g_name = #{g_name}, g_content = #{g_content}
+		WHERE g_id = #{g_id};
+	</update>
+	
+	<!-- Rental Game -->
+	<update id="rentalGame">
+		UPDATE b_game
+		SET g_rent = 0
+		WHERE g_id = #{g_id};
+	</update>
+	
+	<!-- Return Game Admin -->
+	<update id="returnGameAdmin">
+		UPDATE b_game
+		SET g_rent = 1
+		WHERE g_id = #{g_id};
+		
+		UPDATE b_rental
+		SET r_return = 1
+		WHERE r_gid = #{g_id} AND r_return = 0;
+	</update>
+	
+	<!-- Return Game User -->
+	<update id="returnGameUser">
+		UPDATE b_game
+		SET g_rent = 1
+		WHERE g_id = #{r_gid};
+		
+		UPDATE b_rental
+		SET r_return = 1
+		WHERE r_gid = #{r_gid} AND r_uid = #{r_uid};
+	</update>
+	
+	<!-- Insert Game -->
+	<insert id="insertGame">
+		INSERT INTO b_game(g_name, g_content)
+		VALUES(#{g_name}, #{g_content});
+	</insert>
+</mapper>

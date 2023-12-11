@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="RentalMapper">
+	<!-- Rental Insert -->
+	<insert id="insertRental">
+		INSERT INTO b_rental(r_uid, r_gid, r_purpose)
+		VALUES(#{r_uid}, #{r_gid}, #{r_purpose});
+	</insert>
+	
+	<!-- Rental Select -->
+	<select id="selectRental" resultType="RentalDTO">
+		SELECT r_id, r_uid, r_gid, r_date, r_purpose, r_return, r_rdate, g_name
+		FROM b_rental, b_game
+		WHERE r_uid = #{u_id} AND r_return = 0 AND b_rental.r_gid = b_game.g_id;
+	</select>
+	
+	<!-- Rental List -->
+	<select id="rentalList" resultType="RentalDTO">
+		SELECT r_id, r_uid, r_gid, r_date, r_purpose, r_return, r_rdate, g_name, u_name
+		FROM b_rental, b_game, b_user
+		WHERE b_rental.r_gid = b_game.g_id AND b_rental.r_uid = b_user.u_id AND r_id &gt;= #{offset} AND r_return = 0
+		ORDER BY r_id
+		LIMIT 10;
+	</select>
+	
+	<!-- Return List -->
+	<select id="returnList" resultType="RentalDTO">
+		SELECT r_id, r_uid, r_gid, r_date, r_purpose, r_return, r_rdate, g_name, u_name
+		FROM b_rental, b_game, b_user
+		WHERE b_rental.r_gid = b_game.g_id AND b_rental.r_uid = b_user.u_id AND r_id &gt;= #{offset} AND r_return = 1
+		ORDER BY r_id
+		LIMIT 10;
+	</select>
+	
+	<!-- Rental Count -->
+	<select id="rentalCnt" resultType="int">
+		SELECT COUNT(r_id)
+		FROM b_rental
+		WHERE r_return = 0;
+	</select>
+	
+	<!-- Return Count -->
+	<select id="returnCnt" resultType="int">
+		SELECT COUNT(r_id)
+		FROM b_rental
+		WHERE r_return = 1;
+	</select>
+</mapper>
